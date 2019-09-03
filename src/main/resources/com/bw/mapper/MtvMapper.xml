@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.bw.mapper.MtvMapper">
+    
+    <!-- //显示所有
+	List<Map<String, Object>> selectMtvList(Map<String, Object> map); -->
+    
+    
+    <select id="selectMtvList" resultType="map" parameterType="map">
+    SELECT m.mid,m.mname,m.studoe,m.`name`,m.fromTime,t.tname,mt.mtid FROM mtv m
+	LEFT JOIN mtv_type mt
+	on m.mid=mt.mid
+	left JOIN type t
+	on t.tid=mt.tid
+	<where>
+		<if test="names!=null and names!=''">
+		 m.mname LIKE CONCAT('%',#{names},'%')
+		</if>
+	</where>
+    </select>
+    
+    
+    
+    <!-- 显示一条数据进行回显List<Map<String, Object>> selectMtvByID(Integer mid); -->
+     <select id="selectMtvByID" resultType="map" parameterType="int">
+    SELECT m.mid,m.mname,m.studoe,m.`name`,m.fromTime,t.tid,mt.mtid FROM mtv m
+	LEFT JOIN mtv_type mt
+	on m.mid=mt.mid
+	left JOIN type t
+	on t.tid=mt.tid
+	<where>
+		 m.mid=#{0}
+	</where>
+    </select>
+    
+    
+    <!-- List<Types> selectType();//显示所有电影类型 -->
+    <select id="selectType" resultType="types">
+    	select * from type
+    </select>
+    
+    <!--int addMtv(Mtv mtv);添加影视返回主键  -->
+    <insert id="addMtv" parameterType="mtv" useGeneratedKeys="true" keyProperty="mid" >
+    INSERT INTO mtv ( mname, studoe, name, fromTime)
+     VALUES 
+     (#{mname},#{studoe},#{name},#{fromtime});
+    </insert>
+    
+    <!-- int addMtvTypes(Map<String, Object> map); -->
+    
+    <insert id="addMtvTypes" parameterType="map">
+    INSERT INTO mtv_type 
+    ( mid,tid)
+    VALUES ( #{mid},#{tid});
+    
+    </insert>
+    
+    <!--int deleteMtv(@Param("split") String[] split);批量删除  -->
+    <delete id="deleteMtv">
+    
+    delete from mtv where mid in
+    <foreach collection="split" separator="," close=")" open="(" item="m">
+    		${m}
+    </foreach>
+    </delete>
+    
+    <!-- int deleteMtvType(@Param("split")String[] split); 删除中间表 -->
+    <delete id="deleteMtvType">
+     delete from mtv_type where mid in
+    <foreach collection="split" separator="," close=")" open="(" item="m">
+    		${m}
+    </foreach>
+    </delete>
+    
+    
+    
+    <!--int updateMtv(Mtv mtv);数据的修改  -->
+    <update id="updateMtv" parameterType="mtv" >
+    UPDATE mtv SET
+      mname=#{mname}, studoe=#{studoe},
+     name=#{name}, fromTime=#{fromtime} WHERE (mid=#{mid});
+    	
+    </update>
+    
+    </mapper>
