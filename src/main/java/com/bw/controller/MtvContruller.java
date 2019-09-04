@@ -40,8 +40,15 @@ public class MtvContruller {
 		if(pageNum==null){
 			pageNum=1;
 		}
+
 		System.out.println(pageNum);
-		//进行模糊查询
+
+		System.out.println("输出1");
+		System.out.println("日志2");
+		
+		
+		System.out.println("测试分支修改");
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("names", name);
 		
