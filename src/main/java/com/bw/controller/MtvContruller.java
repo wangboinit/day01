@@ -45,7 +45,7 @@ public class MtvContruller {
 
 		System.out.println("输出1");
 		System.out.println("日志2");
-	System.out.println("我要冲突");	
+	System.out.println("我要冲突1");	
 		
 		System.out.println("测试分支修改");
 
