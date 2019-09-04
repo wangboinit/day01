@@ -41,7 +41,8 @@ public class MtvContruller {
 			pageNum=1;
 		}
 		System.out.println("输出1");
-		
+	
+		System.out.println("分支");
 		//进行模糊查询
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("names", name);
