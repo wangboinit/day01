@@ -40,6 +40,7 @@ public class MtvContruller {
 		if(pageNum==null){
 			pageNum=1;
 		}
+		System.out.println("输出1");
 		System.out.println("日志2");
 		
 		//进行模糊查询
