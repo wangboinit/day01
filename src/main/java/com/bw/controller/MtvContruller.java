@@ -40,7 +40,7 @@ public class MtvContruller {
 		if(pageNum==null){
 			pageNum=1;
 		}
-		
+		System.out.println("输出1");
 		
 		//进行模糊查询
 		Map<String, Object> map = new HashMap<String, Object>();
